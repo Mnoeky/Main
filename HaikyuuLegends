@@ -1,0 +1,404 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "🏐Haikyuu Legends Outfits Script🏐",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "🏐Haikyuu Legends Outfits Script🏐",
+   LoadingSubtitle = "by Yeetdatmoonx321",
+   Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "HaikyuuLegendsOutfitsScript"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local MainTab = Window:CreateTab("👕 Outfits", nil) -- Title, Image
+local MainSection = MainTab:CreateSection("Main")
+
+Rayfield:Notify({
+   Title = "Script Successfully Executed!",
+   Content = "Thank You!",
+   Duration = 6.5,
+   Image = nil,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Ushijima Outfit",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+-- Update Shirt and Pants if they exist
+if char:FindFirstChild("Shirt") then
+    char.Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=136182431096369"
+end
+
+if char:FindFirstChild("Pants") then
+    char.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=112362699053893"
+end
+
+-- Creating and parenting a new accessory
+local newaccess = Instance.new("Accessory")
+newaccess.Name = "Ushijima"
+
+local handle = Instance.new("Part")  -- Renamed 'mesh' to 'handle' for clarity
+handle.Name = "Handle"
+handle.Size = Vector3.new(2, 2, 2)  -- Give it a proper size
+handle.Position = char.Head.Position + Vector3.new(0, 2, 0)  -- Adjust placement
+handle.CanCollide = false
+handle.Anchored = false
+handle.Parent = newaccess  -- Parent the handle to the accessory
+
+local specialmesh = Instance.new("SpecialMesh")
+specialmesh.Parent = handle
+specialmesh.MeshId = "rbxassetid://127259318019632"
+specialmesh.TextureId = "rbxassetid://112244049055470"
+
+local attach = Instance.new("Attachment")
+attach.Name = "FaceCenterAttachment"
+attach.Parent = handle
+
+-- Correctly setting up the weld
+local weld = Instance.new("Weld")
+weld.Name = "AccessoryWeld"
+weld.Part0 = handle
+weld.Part1 = char:FindFirstChild("Head")  -- Attach to the head
+weld.C0 = CFrame.new(0, 0, 0)
+weld.C1 = CFrame.new(0, 0, 0)  -- Position offset
+weld.Parent = handle  -- Parent the weld to the handle
+
+-- Parent the accessory to the character AFTER everything is set up
+newaccess.Parent = char
+
+-- Create new hair accessory by creating a new accessory (instead of modifying the existing one)
+local newHair = Instance.new("Accessory")
+newHair.Name = "CustomHair"
+
+local hairHandle = Instance.new("Part")
+hairHandle.Name = "Handle"
+hairHandle.Size = Vector3.new(2, 2, 2)  -- Adjust the size of the new hair accessory
+hairHandle.CanCollide = false
+hairHandle.Anchored = false
+hairHandle.Position = char.Head.Position  -- Position the hair directly at the head’s position
+hairHandle.Parent = newHair
+
+local newHairMesh = Instance.new("SpecialMesh")
+newHairMesh.Parent = hairHandle
+newHairMesh.MeshId = "rbxassetid://5496794831"  -- New hair mesh
+newHairMesh.TextureId = "rbxassetid://5486412051"  -- Set the texture if needed
+newHairMesh.Scale = Vector3.new(1, 1, 1)  -- Adjust size if needed
+
+-- Welding the new hair to the head
+local newHairWeld = Instance.new("Weld")
+newHairWeld.Part0 = hairHandle
+newHairWeld.Part1 = char:FindFirstChild("Head")  -- Attach to the head
+newHairWeld.C0 = CFrame.new(0, -0.3, 0)  -- Adjust the hair position (raise it by 0.5 units) 
+newHairWeld.C1 = CFrame.new(0, 0, 0)  -- Maintain the current relative positioning to the head
+newHairWeld.Parent = hairHandle
+
+-- Parent the new hair accessory to the character
+newHair.Parent = char
+   end,
+})
+
+local Button2 = MainTab:CreateButton({
+   Name = "Bokuto Outfit",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+-- Update Shirt and Pants if they exist
+if char:FindFirstChild("Shirt") then
+    char.Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=96123485554189"
+end
+
+if char:FindFirstChild("Pants") then
+    char.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=108248631805488"
+end
+
+-- Creating and parenting a new accessory
+local newaccess = Instance.new("Accessory")
+newaccess.Name = "Bokuto"
+
+local handle = Instance.new("Part")  
+handle.Name = "Handle"
+handle.Size = Vector3.new(2, 2, 2)  
+handle.Position = char.Head.Position + Vector3.new(0, 2, 0)  
+handle.CanCollide = false
+handle.Anchored = false
+handle.Parent = newaccess  
+
+local specialmesh = Instance.new("SpecialMesh")
+specialmesh.Parent = handle
+specialmesh.MeshId = "rbxassetid://127259318019632"
+specialmesh.TextureId = "rbxassetid://73497152192946"
+
+local attach = Instance.new("Attachment")
+attach.Name = "FaceCenterAttachment"
+attach.Parent = handle
+
+-- Correctly setting up the weld
+local weld = Instance.new("Weld")
+weld.Name = "AccessoryWeld"
+weld.Part0 = handle
+weld.Part1 = char:FindFirstChild("Head")  
+weld.C0 = CFrame.new(0, 0, 0)
+weld.C1 = CFrame.new(0, 0, 0)  
+weld.Parent = handle  
+
+-- Parent the accessory to the character AFTER everything is set up
+newaccess.Parent = char
+
+-- Create first hair accessory
+local newHair = Instance.new("Accessory")
+newHair.Name = "CustomHair"
+
+local hairHandle = Instance.new("Part")
+hairHandle.Name = "Handle"
+hairHandle.Size = Vector3.new(2, 2, 2)  
+hairHandle.CanCollide = false
+hairHandle.Anchored = false
+hairHandle.Position = char.Head.Position  
+hairHandle.Parent = newHair
+
+local newHairMesh = Instance.new("SpecialMesh")
+newHairMesh.Parent = hairHandle
+newHairMesh.MeshId = "rbxassetid://13631262503"  
+newHairMesh.TextureId = "rbxassetid://13631265583"  
+newHairMesh.Scale = Vector3.new(1, 1, 1)  
+
+local newHairWeld = Instance.new("Weld")
+newHairWeld.Part0 = hairHandle
+newHairWeld.Part1 = char:FindFirstChild("Head")  
+newHairWeld.C0 = CFrame.new(0, -0.5, -0.35)  
+newHairWeld.C1 = CFrame.new(0, 0, 0)  
+newHairWeld.Parent = hairHandle
+
+newHair.Parent = char
+
+-- Create second hair accessory
+local newHair2 = Instance.new("Accessory")
+newHair2.Name = "CustomHair2"
+
+local hairHandle2 = Instance.new("Part")
+hairHandle2.Name = "Handle"
+hairHandle2.Size = Vector3.new(2, 2, 2)  
+hairHandle2.CanCollide = false
+hairHandle2.Anchored = false
+hairHandle2.Position = char.Head.Position  
+hairHandle2.Parent = newHair2
+
+local newHairMesh2 = Instance.new("SpecialMesh")
+newHairMesh2.Parent = hairHandle2
+newHairMesh2.MeshId = "rbxassetid://12499692217"  
+newHairMesh2.TextureId = "rbxassetid://12492198949"  
+newHairMesh2.Scale = Vector3.new(1, 1, 1)  
+
+local newHairWeld2 = Instance.new("Weld")
+newHairWeld2.Part0 = hairHandle2
+newHairWeld2.Part1 = char:FindFirstChild("Head")  
+newHairWeld2.C0 = CFrame.new(0, -0.5, 0.3) * CFrame.Angles(0, math.rad(180), 0) -- Rotates the second hair
+newHairWeld2.C1 = CFrame.new(0, 0, 0)  
+newHairWeld2.Parent = hairHandle2  
+
+newHair2.Parent = char
+
+   end,
+})
+
+local Button3 = MainTab:CreateButton({
+   Name = "Oikawa Outfit",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+-- Update Shirt and Pants if they exist
+if char:FindFirstChild("Shirt") then
+    char.Shirt.ShirtTemplate = "rbxassetid://99820230199522"
+end
+
+if char:FindFirstChild("Pants") then
+    char.Pants.PantsTemplate = "rbxassetid://72300874713698"
+end
+
+-- Creating and parenting a new accessory
+local newaccess = Instance.new("Accessory")
+newaccess.Name = "Oikawa"
+
+local handle = Instance.new("Part")  
+handle.Name = "Handle"
+handle.Size = Vector3.new(2, 2, 2)  
+handle.Position = char.Head.Position + Vector3.new(0, 2, 0)  
+handle.CanCollide = false
+handle.Anchored = false
+handle.Parent = newaccess  
+
+local specialmesh = Instance.new("SpecialMesh")
+specialmesh.Parent = handle
+specialmesh.MeshId = "rbxassetid://127259318019632"
+specialmesh.TextureId = "rbxassetid://92317783813564"
+
+local attach = Instance.new("Attachment")
+attach.Name = "FaceCenterAttachment"
+attach.Parent = handle
+
+-- Correctly setting up the weld
+local weld = Instance.new("Weld")
+weld.Name = "AccessoryWeld"
+weld.Part0 = handle
+weld.Part1 = char:FindFirstChild("Head")  
+weld.C0 = CFrame.new(0, 0, 0)
+weld.C1 = CFrame.new(0, 0, 0)  
+weld.Parent = handle  
+
+-- Parent the accessory to the character AFTER everything is set up
+newaccess.Parent = char
+
+-- Create first hair accessory
+local newHair = Instance.new("Accessory")
+newHair.Name = "CustomHair"
+
+local hairHandle = Instance.new("Part")
+hairHandle.Name = "Handle"
+hairHandle.Size = Vector3.new(2, 2, 2)  
+hairHandle.CanCollide = false
+hairHandle.Anchored = false
+hairHandle.Position = char.Head.Position  
+hairHandle.Parent = newHair
+
+local newHairMesh = Instance.new("SpecialMesh")
+newHairMesh.Parent = hairHandle
+newHairMesh.MeshId = "rbxassetid://12910362312"  
+newHairMesh.TextureId = "http://www.roblox.com/asset/?id=12824485855"  
+newHairMesh.Scale = Vector3.new(0.95, 0.95, 0.95)  
+
+local newHairWeld = Instance.new("Weld")
+newHairWeld.Part0 = hairHandle
+newHairWeld.Part1 = char:FindFirstChild("Head")  
+newHairWeld.C0 = CFrame.new(0, -0.35, -0.05)  
+newHairWeld.C1 = CFrame.new(0, 0, 0)  
+newHairWeld.Parent = hairHandle
+
+newHair.Parent = char
+
+
+   end,
+})
+
+local Button4 = MainTab:CreateButton({
+   Name = "Kageyama Outfit",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+-- Update Shirt and Pants if they exist
+if char:FindFirstChild("Shirt") then
+    char.Shirt.ShirtTemplate = "rbxassetid://116292622334267"
+end
+
+if char:FindFirstChild("Pants") then
+    char.Pants.PantsTemplate = "rbxassetid://83657872896937"
+end
+
+-- Creating and parenting a new accessory
+local newaccess = Instance.new("Accessory")
+newaccess.Name = "Kageyama"
+
+local handle = Instance.new("Part")  
+handle.Name = "Handle"
+handle.Size = Vector3.new(2, 2, 2)  
+handle.Position = char.Head.Position + Vector3.new(0, 2, 0)  
+handle.CanCollide = false
+handle.Anchored = false
+handle.Parent = newaccess  
+
+local specialmesh = Instance.new("SpecialMesh")
+specialmesh.Parent = handle
+specialmesh.MeshId = "rbxassetid://127259318019632"
+specialmesh.TextureId = "rbxassetid://118080544777598"
+
+local attach = Instance.new("Attachment")
+attach.Name = "FaceCenterAttachment"
+attach.Parent = handle
+
+-- Correctly setting up the weld
+local weld = Instance.new("Weld")
+weld.Name = "AccessoryWeld"
+weld.Part0 = handle
+weld.Part1 = char:FindFirstChild("Head")  
+weld.C0 = CFrame.new(0, 0, 0)
+weld.C1 = CFrame.new(0, 0, 0)  
+weld.Parent = handle  
+
+-- Parent the accessory to the character AFTER everything is set up
+newaccess.Parent = char
+
+-- Create first hair accessory
+local newHair = Instance.new("Accessory")
+newHair.Name = "CustomHair"
+
+local hairHandle = Instance.new("Part")
+hairHandle.Name = "Handle"
+hairHandle.Size = Vector3.new(2, 2, 2)  
+hairHandle.CanCollide = false
+hairHandle.Anchored = false
+hairHandle.Position = char.Head.Position  
+hairHandle.Parent = newHair
+
+local newHairMesh = Instance.new("SpecialMesh")
+newHairMesh.Parent = hairHandle
+newHairMesh.MeshId = "rbxassetid://18113607835"  
+newHairMesh.TextureId = "rbxassetid://18113607879"  
+newHairMesh.Scale = Vector3.new(1, 1, 1)  
+
+local newHairWeld = Instance.new("Weld")
+newHairWeld.Part0 = hairHandle
+newHairWeld.Part1 = char:FindFirstChild("Head")  
+newHairWeld.C0 = CFrame.new(0, -0.26, 0.1) * CFrame.Angles(0, math.rad(180), 0)
+newHairWeld.C1 = CFrame.new(0, 0, 0)  
+newHairWeld.Parent = hairHandle
+
+newHair.Parent = char
+   end,
+})
+
+local KYSButton = MainTab:CreateButton({
+   Name = "KYS",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+       if player and player.Character then
+           player.Character:BreakJoints() -- Kills the player
+       end
+   end,
+})
+
+local NumberButton = MainTab:CreateButton({
+   Name = "Remove Numbers On Jersey",
+   Callback = function()
+    local char = game.Players.LocalPlayer.Character
+    char.JerseyFront:Destroy()
+    char.JerseyBack:Destroy()
+   end,
+})
