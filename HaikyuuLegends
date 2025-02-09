@@ -589,8 +589,76 @@ newHair.Parent = char
 local Button7 = MainTab:CreateButton({
    Name = "Kenma Kosume Outfit",
    Callback = function()
-    local char = game.Players.LocalPlayer.Character
-    char.JerseyFront:Destroy()
-    char.JerseyBack:Destroy()
+       local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+-- Update Shirt and Pants if they exist
+if char:FindFirstChild("Shirt") then
+    char.Shirt.ShirtTemplate = "rbxassetid://116181691163235"
+end
+
+if char:FindFirstChild("Pants") then
+    char.Pants.PantsTemplate = "rbxassetid://129251029357079"
+end
+
+-- Creating and parenting a new accessory
+local newaccess = Instance.new("Accessory")
+newaccess.Name = "Kenma"
+
+local handle = Instance.new("Part")  
+handle.Name = "Handle"
+handle.Size = Vector3.new(2, 2, 2)  
+handle.Position = char.Head.Position + Vector3.new(0, 2, 0)  
+handle.CanCollide = false
+handle.Anchored = false
+handle.Parent = newaccess  
+
+local specialmesh = Instance.new("SpecialMesh")
+specialmesh.Parent = handle
+specialmesh.MeshId = "rbxassetid://127259318019632"
+specialmesh.TextureId = "rbxassetid://133406839756505"
+
+local attach = Instance.new("Attachment")
+attach.Name = "FaceCenterAttachment"
+attach.Parent = handle
+
+-- Correctly setting up the weld
+local weld = Instance.new("Weld")
+weld.Name = "AccessoryWeld"
+weld.Part0 = handle
+weld.Part1 = char:FindFirstChild("Head")  
+weld.C0 = CFrame.new(0, 0, 0)
+weld.C1 = CFrame.new(0, 0, 0)  
+weld.Parent = handle  
+
+-- Parent the accessory to the character AFTER everything is set up
+newaccess.Parent = char
+
+-- Create first hair accessory
+local newHair = Instance.new("Accessory")
+newHair.Name = "CustomHair"
+
+local hairHandle = Instance.new("Part")
+hairHandle.Name = "Handle"
+hairHandle.Size = Vector3.new(2, 2, 2)  
+hairHandle.CanCollide = false
+hairHandle.Anchored = false
+hairHandle.Position = char.Head.Position  
+hairHandle.Parent = newHair
+
+local newHairMesh = Instance.new("SpecialMesh")
+newHairMesh.Parent = hairHandle
+newHairMesh.MeshId = "rbxassetid://5764279393"  
+newHairMesh.TextureId = "rbxassetid://5764184024"  
+newHairMesh.Scale = Vector3.new(1, 1, 1)  
+
+local newHairWeld = Instance.new("Weld")
+newHairWeld.Part0 = hairHandle
+newHairWeld.Part1 = char:FindFirstChild("Head")  
+newHairWeld.C0 = CFrame.new(0, 0, -0.01)
+newHairWeld.C1 = CFrame.new(0, 0, 0)  
+newHairWeld.Parent = hairHandle
+
+newHair.Parent = char
    end,
 })
