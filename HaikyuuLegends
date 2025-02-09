@@ -44,6 +44,27 @@ Rayfield:Notify({
    Image = nil,
 })
 
+local Paragraph = MainTab:CreateParagraph({Title = "Tutorial", Content = "After or before using a outfit, click the remove numbers on jersey button. If you want to change outfits, use the KYS button to reset character. Keep in mind, after resetting you need to click the remove numbers on jersey button again. Recent Update: Added Oikawa, Kageyama, and Bokuto outfits."})
+
+local KYSButton = MainTab:CreateButton({
+   Name = "KYS",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+       if player and player.Character then
+           player.Character:BreakJoints() -- Kills the player
+       end
+   end,
+})
+
+local NumberButton = MainTab:CreateButton({
+   Name = "Remove Numbers On Jersey",
+   Callback = function()
+    local char = game.Players.LocalPlayer.Character
+    char.JerseyFront:Destroy()
+    char.JerseyBack:Destroy()
+   end,
+})
+
 local Button = MainTab:CreateButton({
    Name = "Ushijima Outfit",
    Callback = function()
@@ -384,21 +405,3 @@ newHair.Parent = char
    end,
 })
 
-local KYSButton = MainTab:CreateButton({
-   Name = "KYS",
-   Callback = function()
-       local player = game.Players.LocalPlayer
-       if player and player.Character then
-           player.Character:BreakJoints() -- Kills the player
-       end
-   end,
-})
-
-local NumberButton = MainTab:CreateButton({
-   Name = "Remove Numbers On Jersey",
-   Callback = function()
-    local char = game.Players.LocalPlayer.Character
-    char.JerseyFront:Destroy()
-    char.JerseyBack:Destroy()
-   end,
-})
