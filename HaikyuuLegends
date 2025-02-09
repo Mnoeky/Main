@@ -66,7 +66,7 @@ local NumberButton = MainTab:CreateButton({
 })
 
 local Button = MainTab:CreateButton({
-   Name = "Ushijima Outfit",
+   Name = "Wakatoshi Ushijima Outfit",
    Callback = function()
        local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
@@ -145,7 +145,7 @@ newHair.Parent = char
 })
 
 local Button2 = MainTab:CreateButton({
-   Name = "Bokuto Outfit",
+   Name = "Kotaro Bokuto Outfit",
    Callback = function()
        local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
@@ -250,7 +250,7 @@ newHair2.Parent = char
 })
 
 local Button3 = MainTab:CreateButton({
-   Name = "Oikawa Outfit",
+   Name = "Toru Oikawa Outfit",
    Callback = function()
        local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
@@ -329,7 +329,7 @@ newHair.Parent = char
 })
 
 local Button4 = MainTab:CreateButton({
-   Name = "Kageyama Outfit",
+   Name = "Tobio Kageyama Outfit",
    Callback = function()
        local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
@@ -405,3 +405,192 @@ newHair.Parent = char
    end,
 })
 
+local Button5 = MainTab:CreateButton({
+   Name = "Atsumu Miya Outfit",
+   Callback = function()
+          local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+-- Update Shirt and Pants if they exist
+if char:FindFirstChild("Shirt") then
+    char.Shirt.ShirtTemplate = "rbxassetid://126303801800294"
+end
+
+if char:FindFirstChild("Pants") then
+    char.Pants.PantsTemplate = "rbxassetid://135769542907737"
+end
+
+-- Creating and parenting a new accessory
+local newaccess = Instance.new("Accessory")
+newaccess.Name = "AtsumuMiya"
+
+local handle = Instance.new("Part")  
+handle.Name = "Handle"
+handle.Size = Vector3.new(2, 2, 2)  
+handle.Position = char.Head.Position + Vector3.new(0, 2, 0)  
+handle.CanCollide = false
+handle.Anchored = false
+handle.Parent = newaccess  
+
+local specialmesh = Instance.new("SpecialMesh")
+specialmesh.Parent = handle
+specialmesh.MeshId = "rbxassetid://127259318019632"
+specialmesh.TextureId = "rbxassetid://75553061916631"
+
+local attach = Instance.new("Attachment")
+attach.Name = "FaceCenterAttachment"
+attach.Parent = handle
+
+-- Correctly setting up the weld
+local weld = Instance.new("Weld")
+weld.Name = "AccessoryWeld"
+weld.Part0 = handle
+weld.Part1 = char:FindFirstChild("Head")  
+weld.C0 = CFrame.new(0, 0, 0)
+weld.C1 = CFrame.new(0, 0, 0)  
+weld.Parent = handle  
+
+-- Parent the accessory to the character AFTER everything is set up
+newaccess.Parent = char
+
+-- Create first hair accessory
+local newHair = Instance.new("Accessory")
+newHair.Name = "CustomHair"
+
+local hairHandle = Instance.new("Part")
+hairHandle.Name = "Handle"
+hairHandle.Size = Vector3.new(2, 2, 2)  
+hairHandle.CanCollide = false
+hairHandle.Anchored = false
+hairHandle.Position = char.Head.Position  
+hairHandle.Parent = newHair
+
+local newHairMesh = Instance.new("SpecialMesh")
+newHairMesh.Parent = hairHandle
+newHairMesh.MeshId = "rbxassetid://4755296547"  
+newHairMesh.TextureId = "http://www.roblox.com/asset/?id=4723909875"  
+newHairMesh.Scale = Vector3.new(1, 1, 1)  
+
+local newHairWeld = Instance.new("Weld")
+newHairWeld.Part0 = hairHandle
+newHairWeld.Part1 = char:FindFirstChild("Head")  
+newHairWeld.C0 = CFrame.new(0, -0.1, -0.025)  
+newHairWeld.C1 = CFrame.new(0, 0, 0)  
+newHairWeld.Parent = hairHandle
+
+newHair.Parent = char
+
+-- Create second hair accessory
+local newHair2 = Instance.new("Accessory")
+newHair2.Name = "CustomHair2"
+
+local hairHandle2 = Instance.new("Part")
+hairHandle2.Name = "Handle"
+hairHandle2.Size = Vector3.new(2, 2, 2)  
+hairHandle2.CanCollide = false
+hairHandle2.Anchored = false
+hairHandle2.Position = char.Head.Position  
+hairHandle2.Parent = newHair2
+
+local newHairMesh2 = Instance.new("SpecialMesh")
+newHairMesh2.Parent = hairHandle2
+newHairMesh2.MeshId = "rbxassetid://5049551885"  
+newHairMesh2.TextureId = "http://www.roblox.com/asset/?id=5053156384"  
+newHairMesh2.Scale = Vector3.new(1, 1, 1)  
+
+local newHairWeld2 = Instance.new("Weld")
+newHairWeld2.Part0 = hairHandle2
+newHairWeld2.Part1 = char:FindFirstChild("Head")  
+newHairWeld2.C0 = CFrame.new(0, -0.3, 0.1) * CFrame.Angles(0, math.rad(180), 0) -- Rotates the second hair
+newHairWeld2.C1 = CFrame.new(0, 0, 0)  
+newHairWeld2.Parent = hairHandle2  
+
+newHair2.Parent = char
+   end,
+})
+
+local Button6 = MainTab:CreateButton({
+   Name = "Osamu Miya Outfit",
+   Callback = function()
+          local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+
+-- Update Shirt and Pants if they exist
+if char:FindFirstChild("Shirt") then
+    char.Shirt.ShirtTemplate = "rbxassetid://103433674854044"
+end
+
+if char:FindFirstChild("Pants") then
+    char.Pants.PantsTemplate = "rbxassetid://135769542907737"
+end
+
+-- Creating and parenting a new accessory
+local newaccess = Instance.new("Accessory")
+newaccess.Name = "Osamu Miya"
+
+local handle = Instance.new("Part")  
+handle.Name = "Handle"
+handle.Size = Vector3.new(2, 2, 2)  
+handle.Position = char.Head.Position + Vector3.new(0, 2, 0)  
+handle.CanCollide = false
+handle.Anchored = false
+handle.Parent = newaccess  
+
+local specialmesh = Instance.new("SpecialMesh")
+specialmesh.Parent = handle
+specialmesh.MeshId = "rbxassetid://127259318019632"
+specialmesh.TextureId = "rbxassetid://103400521938515"
+
+local attach = Instance.new("Attachment")
+attach.Name = "FaceCenterAttachment"
+attach.Parent = handle
+
+-- Correctly setting up the weld
+local weld = Instance.new("Weld")
+weld.Name = "AccessoryWeld"
+weld.Part0 = handle
+weld.Part1 = char:FindFirstChild("Head")  
+weld.C0 = CFrame.new(0, 0, 0)
+weld.C1 = CFrame.new(0, 0, 0)  
+weld.Parent = handle  
+
+-- Parent the accessory to the character AFTER everything is set up
+newaccess.Parent = char
+
+-- Create first hair accessory
+local newHair = Instance.new("Accessory")
+newHair.Name = "CustomHair"
+
+local hairHandle = Instance.new("Part")
+hairHandle.Name = "Handle"
+hairHandle.Size = Vector3.new(2, 2, 2)  
+hairHandle.CanCollide = false
+hairHandle.Anchored = false
+hairHandle.Position = char.Head.Position  
+hairHandle.Parent = newHair
+
+local newHairMesh = Instance.new("SpecialMesh")
+newHairMesh.Parent = hairHandle
+newHairMesh.MeshId = "rbxassetid://5049551885"  
+newHairMesh.TextureId = "http://www.roblox.com/asset/?id=5053158443"  
+newHairMesh.Scale = Vector3.new(1, 1, 1)  
+
+local newHairWeld = Instance.new("Weld")
+newHairWeld.Part0 = hairHandle
+newHairWeld.Part1 = char:FindFirstChild("Head")  
+newHairWeld.C0 = CFrame.new(0, -0.4, -0.01) * CFrame.Angles(0, math.rad(180), 0)
+newHairWeld.C1 = CFrame.new(0, 0, 0)  
+newHairWeld.Parent = hairHandle
+
+newHair.Parent = char
+   end,
+})
+
+local Button7 = MainTab:CreateButton({
+   Name = "Kenma Kosume Outfit",
+   Callback = function()
+    local char = game.Players.LocalPlayer.Character
+    char.JerseyFront:Destroy()
+    char.JerseyBack:Destroy()
+   end,
+})
