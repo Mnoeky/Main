@@ -1,0 +1,264 @@
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local plr = game.Players.LocalPlayer
+local char = plr.Character or plr.CharacterAdded:Wait()
+local humanoid = char:WaitForChild("Humanoid")
+local humanoidRootPart = char:WaitForChild("HumanoidRootPart")
+local plrgui = plr:WaitForChild("PlayerGui")
+local assets = game.ReplicatedStorage:WaitForChild("Assets")
+
+local beam = Instance.new("Beam")
+beam.Parent = humanoidRootPart  -- The beam should be parented to the humanoid root part for visibility
+beam.Width0 = 1  -- Adjust the start width
+beam.Width1 = 1  -- Adjust the end width
+beam.Enabled = false
+beam.Texture = "rbxassetid://965496575"
+
+-- Create the Attachments for the Beam
+local attachment0 = Instance.new("Attachment")
+attachment0.Parent = humanoidRootPart  -- Attach to the HumanoidRootPart
+
+-- Create the second attachment, initially at the same position as Attachment0
+local attachment1 = Instance.new("Attachment")
+attachment1.Parent = humanoidRootPart  -- This will be adjusted below
+
+-- Assign Attachments to the Beam
+beam.Attachment0 = attachment0
+beam.Attachment1 = attachment1
+
+-- Function to update the beam position based on the direction the player is facing
+local function updateBeamPosition()
+    local behindVector = humanoidRootPart.CFrame.LookVector * -10  -- 10 studs behind the player
+    local goalPosition = humanoidRootPart.Position + behindVector  -- Calculate the position
+
+    -- Update Attachment1 position
+    attachment1.WorldPosition = goalPosition  -- Move Attachment1 to the calculated position
+end
+
+local function fadeInBeam(beam, duration)
+    beam.Transparency = NumberSequence.new(1)
+    beam.Transparency = NumberSequence.new(0.9)
+    beam.Transparency = NumberSequence.new(0.8)
+    beam.Transparency = NumberSequence.new(0.7)
+    beam.Transparency = NumberSequence.new(0.6)
+    beam.Transparency = NumberSequence.new(0.5)
+    beam.Transparency = NumberSequence.new(0.4)
+    beam.Transparency = NumberSequence.new(0.3)
+    beam.Transparency = NumberSequence.new(0.2)
+    beam.Transparency = NumberSequence.new(0.1)
+    beam.Transparency = NumberSequence.new(0)
+end
+
+local function fadeOutBeam(beam, duration)
+    beam.Transparency = NumberSequence.new(1)
+    beam.Transparency = NumberSequence.new(0.2)
+    beam.Transparency = NumberSequence.new(0.3)
+    beam.Transparency = NumberSequence.new(0.4)
+    beam.Transparency = NumberSequence.new(0.5)
+    beam.Transparency = NumberSequence.new(0.6)
+    beam.Transparency = NumberSequence.new(0.7)
+    beam.Transparency = NumberSequence.new(0.8)
+    beam.Transparency = NumberSequence.new(0.9)
+    beam.Transparency = NumberSequence.new(1)
+end
+
+
+
+
+-- Wait for the UI elements
+local inGameUI = plrgui:WaitForChild("InGameUI")  -- Ensure the InGameUI is visible
+local bottom = inGameUI:WaitForChild("Bottom")
+local abilitiesFrame = bottom:WaitForChild("Abilities")
+local styleUI = plrgui:WaitForChild("Style")
+
+-- Debug prints to ensure UI elements are loaded
+print("InGameUI:", inGameUI)
+print("Bottom:", bottom)
+print("Abilities Frame:", abilitiesFrame)
+print("Style UI:", styleUI)
+
+-- Update style text
+local slot1 = styleUI.BG.Slots.ScrollingFrame:WaitForChild("Slot1")
+slot1.Text.Text = "Lavinho"
+styleUI.BG.StyleTxt.TextColor3 = Color3.fromRGB(250, 0, 0)
+styleUI.BG.StyleTxt.Text = "Lavinho"
+styleUI.BG.Desc.Text = "Best Dribbler?"
+
+-- Try to find the button template (assuming it's named "1", adjust if necessary)
+local buttontemp = abilitiesFrame:FindFirstChild("1") or abilitiesFrame:GetChildren()[1]
+if not buttontemp then
+    warn("Button template not found in Abilities frame!")
+    return
+else
+    print("Button template found:", buttontemp)
+end
+
+-- Function to clone and setup an ability button
+local function createAbility(name, timerText, keybind)
+    local abil = buttontemp:Clone()
+    abil.Name = name
+    if abil:FindFirstChild("Timer") then
+        abil.Timer.Text = timerText
+    else
+        warn("Timer text label not found in", abil.Name)
+    end
+    if abil:FindFirstChild("Keybind") then
+        abil.Keybind.Text = keybind
+    else
+        warn("Keybind text label not found in", abil.Name)
+    end
+    abil.Parent = abilitiesFrame
+    print("Created ability:", name, timerText, keybind)
+end
+
+-- Create ability buttons with delays in between
+createAbility("4", "Rising Dance", "Z")
+wait(0.1)
+createAbility("5", "Ginga Style", "T")
+wait(0.1)
+createAbility("6", "Perfect Dribble", "H")
+
+-- Load Animation (Replace with your animation ID)
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://105090928177684"  -- Animation ID you provided
+
+local function hMove()
+    local startTime = tick()
+    local moveDuration = 3  -- Duration for the move (5 seconds)
+fadeInBeam(beam, 1)
+    -- Get the direction the character is facing
+    local rightVector = humanoidRootPart.CFrame.RightVector  -- Get the right direction of the character (relative to its facing direction)
+    local leftVector = -rightVector  -- The opposite of the right direction will be left
+
+    while tick() - startTime < moveDuration do
+        -- Move left 10 studs
+        local goalPositionLeft = humanoidRootPart.Position + leftVector * 20
+        local tweenInfoLeft = TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+        local tweenLeft = TweenService:Create(humanoidRootPart, tweenInfoLeft, {Position = goalPositionLeft})
+        tweenLeft:Play()
+               local sound3 = Instance.new("Sound")
+        sound3.Parent = game.Workspace
+        sound3.SoundId = "rbxassetid://1598682218"
+        sound3.Volume = "2"
+        sound3:Play()
+
+        wait(0.1)  -- Wait for 0.1 seconds
+
+        -- Move right 10 studs
+        local goalPositionRight = humanoidRootPart.Position + rightVector * 20
+        local tweenInfoRight = TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+        local tweenRight = TweenService:Create(humanoidRootPart, tweenInfoRight, {Position = goalPositionRight})
+        tweenRight:Play()
+
+        wait(0.1)  -- Wait for 0.1 seconds
+
+    end
+            fadeOutBeam(beam, 1)
+end
+
+-- Function to move the character up smoothly, freeze it, and play the animation
+local function moveUpAndPlayAnimation(upDuration)
+    -- Play the animation 0.5 seconds earlier
+    local animator = humanoid:FindFirstChildOfClass("Animator")
+    if animator then
+        local animTrack = animator:LoadAnimation(animation)
+        
+        -- Set the animation priority to avoid overlap with walking animation
+        animTrack.Priority = Enum.AnimationPriority.Action 
+        
+        animTrack:Play()
+        print("Played animation!")
+    else
+        warn("No Animator found on character!")
+    end
+
+    -- Wait for 0.5 seconds before starting the upward movement
+    wait(0.5)
+
+    -- Move the character up and forward smoothly
+    local forwardVector = humanoidRootPart.CFrame.LookVector
+    local goalPositionUp = humanoidRootPart.Position + forwardVector * 20 + Vector3.new(0, 12.5, 0)
+    local tweenInfoUp = TweenInfo.new(upDuration, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+    
+    local tweenUp = TweenService:Create(humanoidRootPart, tweenInfoUp, {Position = goalPositionUp})
+    
+    -- Fade in the beam before movement starts
+    fadeInBeam(beam, 1)
+
+    local sound2 = Instance.new("Sound")
+    sound2.Parent = game.Workspace
+    sound2.SoundId = "rbxassetid://107212616291562"
+    sound2.Volume = 2
+    sound2:Play()
+
+    tweenUp:Play()
+
+    -- Ensure the beam fades out only when the movement is finished
+    tweenUp.Completed:Connect(function()
+        fadeOutBeam(beam, 1)
+    end)
+end
+
+
+-- Function to move forward multiple times with delay
+local function moveForward()
+    fadeInBeam(beam, 1)  -- Fade in before movement
+
+    local lastTween  -- Store the last tween to detect when movement finishes
+
+    for i = 1, 5 do
+        local forwardVector = humanoidRootPart.CFrame.LookVector  -- Get facing direction
+        local goalPositionForward = humanoidRootPart.Position + forwardVector * 20  -- Move 20 studs forward
+        local tweenInfoForward = TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+
+        -- Create tween for movement
+        lastTween = TweenService:Create(humanoidRootPart, tweenInfoForward, {Position = goalPositionForward})
+        lastTween:Play()
+
+        -- Play sound effect
+        local sound1 = Instance.new("Sound")
+        sound1.Parent = game.Workspace
+        sound1.SoundId = "rbxassetid://116858908110847"
+        sound1.Volume = 2
+        sound1:Play()
+
+        wait(0.5)  -- Wait for each movement
+    end
+
+    -- Only fade out after the last tween completes
+    if lastTween then
+        lastTween.Completed:Connect(function()
+            fadeOutBeam(beam, 1)
+        end)
+    else
+        fadeOutBeam(beam, 1)  -- Just in case the loop didn't run
+    end
+end
+
+
+-- Listen for the Z key press to trigger the move-up animation
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed then
+        if input.KeyCode == Enum.KeyCode.Z then
+            moveUpAndPlayAnimation(0.175)  -- Smooth move up with the animation
+        end
+    end
+end)
+
+-- Listen for the T key press to trigger the move-forward sequence
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed then
+        if input.KeyCode == Enum.KeyCode.T then
+            moveForward()  -- Trigger the forward movement multiple times
+        end
+    end
+end)
+
+-- Listen for the H key press to trigger the "H move"
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed then
+        if input.KeyCode == Enum.KeyCode.H then
+            hMove()  -- Trigger the left-right movement
+        end
+    end
+end)
